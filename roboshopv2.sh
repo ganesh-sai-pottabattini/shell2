@@ -18,16 +18,16 @@ fi
 
 ACTION=$1
 
-if [ "$ACTION" != "create" ] && [ "$ACTION" != "delete" ]; then
-    echo -e "$R ERROR:: First argument must be either create or delete $N"
-    echo "USAGE: $0 [create/delete] [instance1] [instance2...] or [all]"
+if [ "$ACTION" != "create " ] && [ "$ACTION" != "delete"]; then
+    echo -e " $Y Syntax : sh $0 [create/delete] [instance1] [instance2] ..... $N "
     exit 1
 fi
 
 shift
 
 # Get the instance_id. below function will give some id if already that instance_name exists, or None if doesn't exists.
-get_instance_id(){
+get_instance_id()
+{
     aws ec2 describe-instances --filters "Name=tag:Name,Values=$1" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text
 }
 
