@@ -18,7 +18,7 @@ fi
 
 ACTION=$1
 
-if [ "$ACTION" != "create "] && [ "$ACTION" != "delete"]; then
+if [ "$ACTION" != "create " ] && [ "$ACTION" != "delete" ]; then
     echo -e " $Y Syntax : sh $0 [create/delete] [instance1] [instance2] ..... $N "
     exit 1
 fi
