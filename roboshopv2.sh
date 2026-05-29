@@ -38,13 +38,13 @@ do
     #If create is given 
     if [ "$ACTION" == "create" ]; then
         #If no old EC2 instance already exists, create a new one
-        if [ "$INSTANCE_ID" == "None"]; then
+        if [ "$INSTANCE_ID" == "None" ]; then
             echo " creating new instance for $instance "
             INSTANCE_ID=$(aws ec2 run-instances \
             --image-id $AMI_ID \
             --instance-type t3.micro \
             --security-groups "common" "$instance" \
-            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
             --query 'Instances[0].InstanceId' \
             --output text )
 
@@ -56,7 +56,7 @@ do
             echo -e "$Y $instance already running: $INSTANCE_ID $N"
         fi
 
-        if [ "$instance == "frontend" ]; then
+        if [ "$instance" == "frontend" ]; then
 
             IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
