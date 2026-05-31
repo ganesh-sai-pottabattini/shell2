@@ -79,7 +79,8 @@ do
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
 
-            echo "$IP"
+            echo "Public Ip Address of $instance : $IP"
+
 
             R53_RECORD="$DOMAIN_NAME"
 
@@ -89,6 +90,13 @@ do
                 --output text)
 
                 echo "$IP"
+
+                PublicIpAddress=$(aws ec2 describe-instances \
+                            --instance-ids $INSTANCE_ID \
+                            --query "Reservations[*].Instances[*].PublicIpAddress" \
+                            --output text
+                            )
+                echo " Public IP Address of $instance :  $PublicIpAddress "
 
                 R53_RECORD="$instance.$DOMAIN_NAME"
         fi
