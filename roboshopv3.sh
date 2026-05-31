@@ -56,7 +56,7 @@ do
     if [ "$ACTION" == "create" ]; then
         #If no old EC2 instance already exists, create a new one
         if [ "$INSTANCE_ID" == "None" ]; then
-            echo " creating new instance for $instance "
+            echo " creating new instance for ${instance^^} "
             INSTANCE_ID=$(aws ec2 run-instances \
             --image-id $AMI_ID \
             --instance-type t3.micro \
@@ -65,7 +65,7 @@ do
             --query 'Instances[0].InstanceId' \
             --output text )
 
-            echo -e " $G created new instance for $instance $N "
+            echo -e " $G created new instance for ${instance^^} $N "
             aws ec2 wait instance-running --instance-ids $INSTANCE_ID
             echo -e " $Y Instance ID : $INSTANCE_ID $N "
 
