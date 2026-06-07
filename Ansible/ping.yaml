@@ -1,0 +1,5 @@
+- name: Ping the Nodes
+  hosts: frontend
+  tasks: 
+  - name: ping the servers
+    ping:
